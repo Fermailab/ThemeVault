@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+<!-- Copyright (C) 2026 ThemeVault Contributors -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ThemeVault Dashboard - Invision Community Styler</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="../icons/icon-48.png" alt="ThemeVault" class="sidebar-logo" width="36" height="36">
+        <div>
+          <h1 class="sidebar-title">ThemeVault</h1>
+          <span class="sidebar-tag">Invision Community Studio</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button type="button" class="nav-item active" data-tab="tab-vault">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span>Theme Vault</span>
+        </button>
+        <button type="button" class="nav-item" data-tab="tab-studio">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          <span>Theme Studio (CSS)</span>
+        </button>
+        <button type="button" class="nav-item" data-tab="tab-sites">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          <span>Site Rules</span>
+        </button>
+        <button type="button" class="nav-item" data-tab="tab-backup">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+          <span>Backup & Sync</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="license-badge">
+          <span>License: GPL-3.0-or-later</span>
+          <span>Universal MV3 Extension</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Container -->
+    <main class="content-viewport">
+      <!-- Top Bar -->
+      <header class="topbar">
+        <div class="topbar-title-group">
+          <h2 class="view-title" id="view-title">Theme Vault</h2>
+          <p class="view-desc" id="view-desc">Browse, apply, and manage community themes across any Invision Community forum.</p>
+        </div>
+        <div class="topbar-actions" id="topbar-actions">
+          <button type="button" class="btn btn-secondary" id="btn-create-theme">+ Create New Theme</button>
+        </div>
+      </header>
+
+      <!-- Toast Notification Alert -->
+      <div class="options-toast" id="options-toast"></div>
+
+      <!-- Tab: Theme Vault -->
+      <section class="tab-pane active" id="tab-vault">
+        <div class="filter-bar">
+          <input type="text" class="search-input" id="search-themes" placeholder="Search themes by name or author...">
+          <div class="filter-group">
+            <span class="label-muted">Default Theme:</span>
+            <select id="global-default-select" class="select-inline"></select>
+          </div>
+        </div>
+        <div class="themes-grid" id="themes-grid">
+          <!-- Dynamically populated theme cards -->
+        </div>
+      </section>
+
+      <!-- Tab: Theme Studio (CSS / Customizer) -->
+      <section class="tab-pane" id="tab-studio">
+        <div class="studio-layout">
+          <!-- Left: Meta & Tokens -->
+          <div class="studio-sidebar">
+            <div class="card form-card">
+              <h3 class="card-title">Theme Attributes</h3>
+              <div class="form-group">
+                <label for="studio-name">Theme Name</label>
+                <input type="text" id="studio-name" class="input-text" placeholder="e.g. Cyberpunk Neon">
+              </div>
+              <div class="form-group">
+                <label for="studio-desc">Description</label>
+                <input type="text" id="studio-desc" class="input-text" placeholder="Short description of this theme">
+              </div>
+              <div class="form-group">
+                <label for="studio-author">Author</label>
+                <input type="text" id="studio-author" class="input-text" placeholder="Your name or handle">
+              </div>
+
+              <h4 class="card-subtitle mt-4">Palette Tokens</h4>
+              <div class="token-grid">
+                <div class="token-item">
+                  <label for="token-bg">Background</label>
+                  <div class="color-picker-input">
+                    <input type="color" id="token-bg" value="#1e1e2e">
+                    <span class="hex-text" id="hex-bg">#1e1e2e</span>
+                  </div>
+                </div>
+                <div class="token-item">
+                  <label for="token-surface">Surface</label>
+                  <div class="color-picker-input">
+                    <input type="color" id="token-surface" value="#282a36">
+                    <span class="hex-text" id="hex-surface">#282a36</span>
+                  </div>
+                </div>
+                <div class="token-item">
+                  <label for="token-primary">Primary Accent</label>
+                  <div class="color-picker-input">
+                    <input type="color" id="token-primary" value="#38bdf8">
+                    <span class="hex-text" id="hex-primary">#38bdf8</span>
+                  </div>
+                </div>
+                <div class="token-item">
+                  <label for="token-text">Text Color</label>
+                  <div class="color-picker-input">
+                    <input type="color" id="token-text" value="#f8fafc">
+                    <span class="hex-text" id="hex-text">#f8fafc</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-actions mt-4">
+                <button type="button" class="btn btn-primary w-full" id="btn-save-studio-theme">Save Theme to Vault</button>
+              </div>
+            </div>
+
+            <!-- Helper Box: IPS CSS Selectors Reference -->
+            <div class="card selector-cheatsheet mt-4">
+              <h4 class="card-subtitle">Invision Community Selectors</h4>
+              <ul class="selector-list">
+                <li><code>body.ipsApp</code> - Forum body root</li>
+                <li><code>#ipsLayout_header</code> - Forum top navigation</li>
+                <li><code>.ipsBox</code> - Primary cards / containers</li>
+                <li><code>.ipsDataItem</code> - Topic / Forum list rows</li>
+                <li><code>.ipsComment</code> - Topic post item</li>
+                <li><code>.ipsType_richText</code> - Post body content</li>
+                <li><code>pre.ipsCode</code> - Code snippets</li>
+                <li><code>blockquote.ipsQuote</code> - User quote blocks</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Right: Code Editor -->
+          <div class="studio-editor-area">
+            <div class="editor-header">
+              <span class="editor-title">Theme Stylesheet (CSS)</span>
+              <div class="editor-actions">
+                <button type="button" class="btn btn-sm btn-secondary" id="btn-insert-boilerplate">Insert Boilerplate</button>
+              </div>
+            </div>
+            <textarea id="studio-css" class="code-textarea" spellcheck="false" placeholder="/* Enter custom CSS rules targeting Invision Community elements... */"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab: Site Rules -->
+      <section class="tab-pane" id="tab-sites">
+        <div class="card">
+          <div class="card-header-row">
+            <div>
+              <h3 class="card-title">Managed Invision Community Sites</h3>
+              <p class="card-desc">Configure per-domain theme overrides, custom CSS, and forced IPS activation.</p>
+            </div>
+            <div class="add-site-form">
+              <input type="text" id="new-site-domain" class="input-text" placeholder="e.g. forums.example.com">
+              <button type="button" class="btn btn-primary" id="btn-add-site">+ Add Domain</button>
+            </div>
+          </div>
+
+          <div class="table-responsive mt-4">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Domain</th>
+                  <th>Assigned Theme</th>
+                  <th>Status</th>
+                  <th>Forced IPS</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="sites-table-body">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab: Backup & Portability -->
+      <section class="tab-pane" id="tab-backup">
+        <div class="grid-2-col">
+          <div class="card">
+            <h3 class="card-title">Export Vault</h3>
+            <p class="card-desc">Download a complete JSON backup containing all your custom themes, site overrides, and preferences.</p>
+            <div class="mt-4">
+              <button type="button" class="btn btn-primary" id="btn-export-vault">Download Vault Backup (.json)</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Import Vault</h3>
+            <p class="card-desc">Restore your themes and site preferences from a previously exported ThemeVault JSON file.</p>
+            <div class="mt-4 file-drop-zone">
+              <input type="file" id="import-vault-file" accept=".json">
+              <label for="import-vault-file" class="btn btn-secondary">Select JSON File</label>
+            </div>
+          </div>
+
+          <div class="card col-span-2 danger-zone">
+            <h3 class="card-title text-danger">Reset to Defaults</h3>
+            <p class="card-desc">Clears all site overrides and custom themes, restoring ThemeVault to original factory defaults.</p>
+            <div class="mt-4">
+              <button type="button" class="btn btn-danger" id="btn-reset-factory">Reset Everything</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../core/browser-polyfill.js"></script>
+  <script src="../core/default-themes.js"></script>
+  <script src="../core/storage.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

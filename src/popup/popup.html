@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+<!-- Copyright (C) 2026 ThemeVault Contributors -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ThemeVault - Invision Community Styler</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <img src="../icons/icon-32.png" alt="ThemeVault" class="logo" width="24" height="24">
+        <div>
+          <h1 class="title">ThemeVault</h1>
+          <span class="subtext">Invision Community Styler</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <label class="switch" title="Toggle ThemeVault on this site">
+          <input type="checkbox" id="site-master-toggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </header>
+
+    <!-- Detection Status Card -->
+    <section class="status-card" id="status-card">
+      <div class="status-indicator">
+        <span class="status-dot" id="status-dot"></span>
+        <div class="status-text-group">
+          <span class="status-label" id="status-label">Detecting forum...</span>
+          <span class="status-domain" id="status-domain">example.com</span>
+        </div>
+      </div>
+      <button type="button" class="btn-ghost btn-sm" id="btn-force-ips" style="display: none;">
+        Force Enable
+      </button>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="main-body" id="main-controls">
+      <!-- Theme Selector Section -->
+      <section class="section">
+        <div class="section-header">
+          <label for="theme-select" class="section-title">Active Theme</label>
+          <span class="badge" id="theme-count-badge">6 Presets</span>
+        </div>
+        <div class="theme-select-wrapper">
+          <select id="theme-select" class="select-input">
+            <!-- Dynamically populated -->
+          </select>
+        </div>
+
+        <!-- Color Palette Preview -->
+        <div class="palette-preview" id="palette-preview" title="Active Theme Palette">
+          <span class="swatch" id="swatch-bg" title="Background"></span>
+          <span class="swatch" id="swatch-surface" title="Surface"></span>
+          <span class="swatch" id="swatch-primary" title="Primary Accent"></span>
+          <span class="swatch" id="swatch-text" title="Text"></span>
+        </div>
+      </section>
+
+      <!-- Accent Color Override -->
+      <section class="section">
+        <div class="section-header">
+          <span class="section-title">Accent Accentuation</span>
+          <button type="button" class="btn-text btn-xs" id="btn-reset-accent">Reset</button>
+        </div>
+        <div class="accent-picker-row">
+          <div class="preset-colors">
+            <button type="button" class="accent-btn" data-color="#38bdf8" style="background: #38bdf8;" aria-label="Cyan"></button>
+            <button type="button" class="accent-btn" data-color="#88c0d0" style="background: #88c0d0;" aria-label="Frost Blue"></button>
+            <button type="button" class="accent-btn" data-color="#bd93f9" style="background: #bd93f9;" aria-label="Purple"></button>
+            <button type="button" class="accent-btn" data-color="#34d399" style="background: #34d399;" aria-label="Emerald"></button>
+            <button type="button" class="accent-btn" data-color="#fb7185" style="background: #fb7185;" aria-label="Rose"></button>
+          </div>
+          <div class="custom-color-wrapper">
+            <input type="color" id="accent-custom-color" value="#38bdf8" title="Custom color">
+          </div>
+        </div>
+      </section>
+
+      <!-- Invision Community QoL Tweaks -->
+      <section class="section">
+        <span class="section-title">Forum Enhancements</span>
+        <div class="tweak-list">
+          <label class="tweak-item">
+            <span class="tweak-name">Sticky Navigation Bar</span>
+            <input type="checkbox" id="tweak-stickyHeader">
+            <span class="tweak-checkbox"></span>
+          </label>
+          <label class="tweak-item">
+            <span class="tweak-name">Clean Reading (Hide Signatures)</span>
+            <input type="checkbox" id="tweak-cleanReading">
+            <span class="tweak-checkbox"></span>
+          </label>
+          <label class="tweak-item">
+            <span class="tweak-name">Code Block Copy Button</span>
+            <input type="checkbox" id="tweak-codeCopy">
+            <span class="tweak-checkbox"></span>
+          </label>
+          <label class="tweak-item">
+            <span class="tweak-name">Compact User Cards</span>
+            <input type="checkbox" id="tweak-compactCards">
+            <span class="tweak-checkbox"></span>
+          </label>
+          <label class="tweak-item">
+            <span class="tweak-name">Media Dimmer (Dark Mode)</span>
+            <input type="checkbox" id="tweak-darkMedia">
+            <span class="tweak-checkbox"></span>
+          </label>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Bar -->
+    <footer class="footer">
+      <button type="button" class="btn-primary w-full" id="btn-open-options">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9"></path>
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+        </svg>
+        <span>Open Theme Vault & Editor</span>
+      </button>
+      <div class="footer-meta">
+        <span>GPLv3 Open Source</span>
+        <span>v1.0.0</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../core/browser-polyfill.js"></script>
+  <script src="../core/default-themes.js"></script>
+  <script src="../core/storage.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
