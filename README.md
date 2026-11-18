@@ -3,6 +3,7 @@
 > A GPL-licensed, browser-agnostic browser extension providing custom themes, layout tweaks, and theme vault management for **any** Invision Community forum (IPS 4.x, Invision Community 5, and legacy IP.Board).
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+[![CI](https://github.com/Fermailab/ThemeVault/actions/workflows/ci.yml/badge.svg)](https://github.com/Fermailab/ThemeVault/actions/workflows/ci.yml)
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-success.svg)]()
 [![Browsers](https://img.shields.io/badge/Browsers-Chrome%20%7C%20Firefox%20%7C%20Edge%20%7C%20Safari-orange.svg)]()
 
@@ -152,6 +153,16 @@ xcrun safari-web-extension-converter dist/chrome --project-location ./safari-bui
 2. **DOM Ready Phase**: Once the DOM finishes parsing, `IPSDetector.detect()` computes a confidence score (0-100%) by analyzing meta tags, controller attributes, landmarks, and IC5 variables.
 3. **Background Sync**: If detected, a notification is dispatched to the background worker (`background.js`), which badges the extension icon with `IPS` and sets the active theme in the tooltip.
 4. **Interactive Controls**: Opening the popup allows switching themes with zero page reload, adjusting the primary accent hue, or toggling quality-of-life forum features.
+
+---
+
+## Contributing
+
+We welcome community contributions, bug reports, and new Invision Community color schemes!
+
+* **[Contributing Guidelines](CONTRIBUTING.md)**: Setup instructions, coding standards, and PR workflow.
+* **[Code of Conduct](CODE_OF_CONDUCT.md)**: Community standards and reporting guidelines.
+* **[Security Policy](SECURITY.md)**: Responsible vulnerability disclosure process.
 
 ---
 

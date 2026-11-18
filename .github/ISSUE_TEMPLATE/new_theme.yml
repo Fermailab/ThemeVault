@@ -1,0 +1,58 @@
+name: Submit New Theme
+description: Propose a new curated color scheme or preset theme for Invision Community
+title: "[Theme]: "
+labels: ["theme", "community-contribution"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for contributing a color scheme! Please provide the palette details below.
+  - type: input
+    id: theme_name
+    attributes:
+      label: Theme Name
+      description: What is the display name of your theme?
+      placeholder: "e.g., Midnight Amethyst"
+    validations:
+      required: true
+  - type: textarea
+    id: theme_desc
+    attributes:
+      label: Theme Description
+      description: A 1-2 sentence description explaining the vibe and aesthetic.
+      placeholder: "A deep violet dark theme with electric lavender accents designed for night reading."
+    validations:
+      required: true
+  - type: textarea
+    id: palette
+    attributes:
+      label: Palette Variables (HEX / RGB)
+      description: Provide the 8 core ThemeVault color values.
+      value: |
+        - Background (`--tv-bg`): #
+        - Surface / Cards (`--tv-surface`): #
+        - Elevated Surface (`--tv-surface-elevated`): #
+        - Borders & Dividers (`--tv-border`): #
+        - Primary Text (`--tv-text`): #
+        - Muted Text (`--tv-text-muted`): #
+        - Primary Action (`--tv-primary`): #
+        - Accent Highlight (`--tv-accent`): #
+    validations:
+      required: true
+  - type: dropdown
+    id: contrast_check
+    attributes:
+      label: WCAG Contrast Verification
+      description: Have you verified that text colors provide sufficient contrast against background/surface (WCAG AA)?
+      options:
+        - "Yes, all text is comfortably readable with high contrast"
+        - "Mostly, but may need minor adjustment"
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots / Previews
+      description: Attach screenshots demonstrating your theme applied to an Invision Community forum.
+    validations:
+      required: false

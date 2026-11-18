@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security Vulnerability Reporting
+    url: mailto:security@fermailab.dev
+    about: Please report security vulnerabilities privately via email.
+  - name: General Support & Questions
+    url: mailto:support@fermailab.dev
+    about: Reach out for general community questions and assistance.
