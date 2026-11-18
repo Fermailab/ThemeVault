@@ -55,6 +55,17 @@ webext.runtime.onInstalled.addListener(async (details) => {
 });
 
 /**
+ * Handle extension auto-update when a new version is downloaded by the browser.
+ * Immediately applies the update instead of postponing until full browser restart.
+ */
+if (typeof chrome !== 'undefined' && chrome.runtime?.onUpdateAvailable) {
+  chrome.runtime.onUpdateAvailable.addListener((details) => {
+    console.log(`[ThemeVault] New version ${details.version} downloaded. Reloading extension to apply update...`);
+    chrome.runtime.reload();
+  });
+}
+
+/**
  * Handle context menu item clicks.
  */
 if (typeof chrome !== 'undefined' && chrome.contextMenus) {

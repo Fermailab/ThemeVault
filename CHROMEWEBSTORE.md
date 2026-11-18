@@ -110,8 +110,7 @@ English
 ## Privacy Policy
 
 **Privacy Policy URL** [REQUIRED]
-`https://raw.githubusercontent.com/USER/ThemeVault/main/PRIVACY.md`
-*(Or the hosted URL of PRIVACY.md on your domain / GitHub Pages)*
+`https://github.com/Fermailab/ThemeVault/blob/main/PRIVACY.md`
 
 
 ## Distribution
@@ -123,16 +122,16 @@ English
 ## Developer Info
 
 **Publisher Name** [REQUIRED]
-[Your Name / Organization]
+Fermailab
 
 **Contact Email** [REQUIRED]
-[Your Public Contact Email]
+support@fermailab.dev
 
 **Support URL / Email** [RECOMMENDED]
-[Your GitHub Issues or Support Email]
+https://github.com/Fermailab/ThemeVault/issues
 
 **Homepage URL** [RECOMMENDED]
-[Your Project Repository URL]
+https://github.com/Fermailab/ThemeVault
 
 
 ## Version History
