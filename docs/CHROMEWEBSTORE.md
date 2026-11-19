@@ -58,11 +58,9 @@ English
 | Asset | Dimensions | Status | Filename |
 |---|---|---|---|
 | Store Icon [REQUIRED] | 128×128 PNG | ✅ Ready | `src/icons/icon-128.png` |
-| Screenshot 1 [REQUIRED] | 1280×800 or 640×400 | 🟡 Needs capture | Showing dark theme applied to an Invision forum |
-| Screenshot 2 [RECOMMENDED] | 1280×800 or 640×400 | 🟡 Needs capture | Showing the quick switcher popup with theme choices |
-| Screenshot 3 [RECOMMENDED] | 1280×800 or 640×400 | 🟡 Needs capture | Showing the Theme Studio & CSS editor dashboard |
-| Screenshot 4 [RECOMMENDED] | 1280×800 or 640×400 | 🟡 Needs capture | Demonstrating Clean Reading Mode with signatures hidden |
-| Small Promo Tile [RECOMMENDED] | 440×280 PNG | 🟡 Needs capture | ThemeVault logo with palette showcase |
+| Screenshot 1 [REQUIRED] | 1280×800 | ✅ Ready | `docs/assets/screenshot-vault-1280x800.png` |
+| Screenshot 2 [RECOMMENDED] | 1280×800 | ✅ Ready | `docs/assets/screenshot-studio-1280x800.png` |
+| Small Promo Tile [RECOMMENDED] | 440×280 PNG | ✅ Ready | `docs/assets/promo-440x280.png` |
 | Marquee Promo Tile | 1400×560 PNG | ⬜ Optional | Wide banner showcase |
 
 ### Screenshot Notes

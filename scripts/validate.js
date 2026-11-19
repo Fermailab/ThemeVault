@@ -17,12 +17,14 @@ const rootDir = path.resolve(__dirname, '..');
 console.log('[ThemeVault Validation] Running pre-flight checks...');
 
 // 1. Validate JS syntax with node --check
-function findJsFiles(dir) {
+function findJsFiles(dir, excludeDirs = []) {
   let files = [];
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      files.push(...findJsFiles(full));
+      if (!excludeDirs.includes(entry.name)) {
+        files.push(...findJsFiles(full, excludeDirs));
+      }
     } else if (entry.name.endsWith('.js')) {
       files.push(full);
     }
@@ -32,7 +34,8 @@ function findJsFiles(dir) {
 
 const jsFiles = [
   ...findJsFiles(path.join(rootDir, 'src')),
-  ...findJsFiles(path.join(rootDir, 'scripts'))
+  ...findJsFiles(path.join(rootDir, 'scripts')),
+  ...(fs.existsSync(path.join(rootDir, 'tests')) ? findJsFiles(path.join(rootDir, 'tests'), ['fixtures']) : [])
 ];
 
 let syntaxErrors = 0;

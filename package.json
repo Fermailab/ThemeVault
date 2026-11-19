@@ -5,7 +5,9 @@
   "license": "GPL-3.0-or-later",
   "type": "module",
   "scripts": {
-    "test": "node scripts/validate.js",
+    "test": "node scripts/validate.js && node --test tests/theme-switcher.test.js",
+    "test:unit": "node --test tests/theme-switcher.test.js",
+    "serve": "node scripts/serve-fixture.js",
     "generate-icons": "node scripts/generate-icons.js",
     "build": "node scripts/build.js --target=all",
     "build:chrome": "node scripts/build.js --target=chrome",

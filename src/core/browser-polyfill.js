@@ -55,6 +55,57 @@
     });
   }
 
+  const hasStorage = !!(rawBrowser?.storage?.local || rawChrome?.storage?.local);
+
+  const fallbackStorage = {
+    get: async (keys) => {
+      try {
+        if (!keys) return {};
+        if (typeof keys === 'string') {
+          const val = localStorage.getItem(keys);
+          return { [keys]: val ? JSON.parse(val) : undefined };
+        }
+        if (Array.isArray(keys)) {
+          const res = {};
+          keys.forEach((k) => {
+            const val = localStorage.getItem(k);
+            if (val !== null) res[k] = JSON.parse(val);
+          });
+          return res;
+        }
+        if (typeof keys === 'object') {
+          const res = {};
+          for (const [k, def] of Object.entries(keys)) {
+            const val = localStorage.getItem(k);
+            res[k] = val !== null ? JSON.parse(val) : def;
+          }
+          return res;
+        }
+        return {};
+      } catch {
+        return {};
+      }
+    },
+    set: async (items) => {
+      try {
+        for (const [k, v] of Object.entries(items || {})) {
+          localStorage.setItem(k, JSON.stringify(v));
+        }
+      } catch {}
+    },
+    remove: async (keys) => {
+      try {
+        const list = Array.isArray(keys) ? keys : [keys];
+        list.forEach((k) => localStorage.removeItem(k));
+      } catch {}
+    },
+    clear: async () => {
+      try {
+        localStorage.clear();
+      } catch {}
+    }
+  };
+
   const webext = {
     isFirefox: typeof navigator !== 'undefined' && /firefox/i.test(navigator.userAgent),
     isChromium: typeof navigator !== 'undefined' && /chrome|chromium|edg/i.test(navigator.userAgent),
@@ -62,10 +113,10 @@
 
     storage: {
       local: {
-        get: (keys) => promisify((rawBrowser?.storage?.local || rawChrome?.storage?.local), 'get', [keys]),
-        set: (items) => promisify((rawBrowser?.storage?.local || rawChrome?.storage?.local), 'set', [items]),
-        remove: (keys) => promisify((rawBrowser?.storage?.local || rawChrome?.storage?.local), 'remove', [keys]),
-        clear: () => promisify((rawBrowser?.storage?.local || rawChrome?.storage?.local), 'clear', [])
+        get: (keys) => hasStorage ? promisify((rawBrowser?.storage?.local || rawChrome?.storage?.local), 'get', [keys]) : fallbackStorage.get(keys),
+        set: (items) => hasStorage ? promisify((rawBrowser?.storage?.local || rawChrome?.storage?.local), 'set', [items]) : fallbackStorage.set(items),
+        remove: (keys) => hasStorage ? promisify((rawBrowser?.storage?.local || rawChrome?.storage?.local), 'remove', [keys]) : fallbackStorage.remove(keys),
+        clear: () => hasStorage ? promisify((rawBrowser?.storage?.local || rawChrome?.storage?.local), 'clear', []) : fallbackStorage.clear()
       },
       sync: {
         get: async (keys) => {

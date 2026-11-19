@@ -9,7 +9,398 @@
 (function (global) {
   'use strict';
 
-  const DEFAULT_THEMES = [
+  /**
+   * Generates a complete, robust stylesheet covering all Invision Community elements.
+   * Handles IPS 4.x, IPS 5.x, header wrappers, category banners, widgets, and controls.
+   *
+   * @param {string} themeName
+   * @param {Object} colors
+   * @param {boolean} isLight
+   * @returns {string}
+   */
+  function buildThemeCSS(themeName, colors, isLight = false) {
+    const textColorOnPrimary = isLight ? '#ffffff' : (colors.bg || '#11111b');
+    const codeBg = isLight ? '#f1f5f9' : '#11111b';
+    const codeColor = isLight ? '#334155' : (colors.primary || '#88c0d0');
+
+    return `
+/* ========================================================
+   ThemeVault: ${themeName} for Invision Community
+   Universal IPS 4.x & IPS 5.x Complete Skinning Architecture
+   ======================================================== */
+:root {
+  --tv-bg: ${colors.bg};
+  --tv-surface: ${colors.surface};
+  --tv-surface-elevated: ${colors.surfaceElevated};
+  --tv-border: ${colors.border};
+  --tv-text: ${colors.text};
+  --tv-text-muted: ${colors.textMuted};
+  --tv-primary: ${colors.primary};
+  --tv-accent: ${colors.accent};
+
+  /* IPS 5 and Modern Framework Design Tokens */
+  --i-primary: var(--tv-primary);
+  --i-color--primary: var(--tv-primary);
+  --i-surface: var(--tv-surface);
+  --i-surface--elevated: var(--tv-surface-elevated);
+  --i-surface--sunken: var(--tv-bg);
+  --i-background: var(--tv-bg);
+  --i-background--header: var(--tv-surface);
+  --i-background--surface: var(--tv-surface);
+  --i-background--surface-elevated: var(--tv-surface-elevated);
+  --i-background--section-header: var(--tv-surface-elevated);
+  --i-color--section-title: var(--tv-text);
+  --i-color--text: var(--tv-text);
+  --i-color--text-muted: var(--tv-text-muted);
+  --i-color--border: var(--tv-border);
+  --header--background: var(--tv-surface);
+  --header--color: var(--tv-text);
+  --nav--background: var(--tv-surface);
+
+  /* IPS 5 Dynamic Palette & Header Custom Properties */
+  --i-headerTop--ba-co: var(--tv-surface) !important;
+  --i-headerTop--co: var(--tv-text) !important;
+  --i-headerPrimary--ba-co: var(--tv-surface) !important;
+  --i-headerPrimary--co: var(--tv-text) !important;
+  --i-headerSecondary--ba-co: var(--tv-surface-elevated) !important;
+  --i-headerSecondary--co: var(--tv-text) !important;
+  --i-boxHeader--ba-co: var(--tv-surface-elevated) !important;
+  --i-boxHeader--co: var(--tv-text) !important;
+  --i-widget-header--ba-co: var(--tv-surface-elevated) !important;
+  --i-widget-header--co: var(--tv-text) !important;
+  --i-box--ba-co: var(--tv-surface) !important;
+  --i-box--bo-co: var(--tv-border) !important;
+  --i-background_1: var(--tv-bg) !important;
+  --i-background_2: var(--tv-surface) !important;
+  --i-background_3: var(--tv-surface-elevated) !important;
+  --i-background_4: var(--tv-border) !important;
+  --i-base_1: var(--tv-bg) !important;
+  --i-base_2: var(--tv-surface-elevated) !important;
+  --i-base_3: var(--tv-surface) !important;
+  --i-base_4: var(--tv-border) !important;
+  --i-base_5: var(--tv-border) !important;
+  --i-base_6: var(--tv-border) !important;
+  --i-color_hard: var(--tv-text) !important;
+  --i-color_soft: var(--tv-text-muted) !important;
+  --i-color_contrast: var(--tv-text) !important;
+  --dark__i-boxHeader--ba-co: var(--tv-surface-elevated) !important;
+  --dark__i-widget-header--ba-co: var(--tv-surface-elevated) !important;
+  --dark__i-headerTop--ba-co: var(--tv-surface) !important;
+  --dark__i-headerPrimary--ba-co: var(--tv-surface) !important;
+  --dark__i-headerSecondary--ba-co: var(--tv-surface-elevated) !important;
+  --light__i-boxHeader--ba-co: var(--tv-surface-elevated) !important;
+  --light__i-widget-header--ba-co: var(--tv-surface-elevated) !important;
+  --light__i-headerTop--ba-co: var(--tv-surface) !important;
+  --light__i-headerPrimary--ba-co: var(--tv-surface) !important;
+  --light__i-headerSecondary--ba-co: var(--tv-surface-elevated) !important;
+}
+
+/* 1. Global Page Background & Shell */
+html,
+body.ipsApp,
+body.ipsApp_front,
+body[data-pageapp],
+#ipsLayout_body,
+#ipsLayout_contentArea,
+#ipsLayout_mainArea,
+.ipsLayout_container {
+  background-color: var(--tv-bg) !important;
+  color: var(--tv-text) !important;
+}
+
+/* 2. Header, Navigation, User Bar & Search */
+#ipsLayout_header,
+#ipsLayout_header header,
+#ipsLayout_header nav,
+#ipsLayout_navBar,
+#elNav,
+#elNavigation,
+.ipsHeader,
+.ipsHeader__top,
+.ipsHeader__primary,
+.ipsHeader__align,
+.ipsResponsive_header--desktop,
+.ipsResponsive_header--mobile,
+.ipsMobileHeader,
+.ipsNavBar,
+.ipsNavBar_primary,
+.ipsNavBar_secondary,
+.ipsNavBar_user,
+#elUserNav,
+.ipsUserNav,
+#elSearch,
+#ipsLayout_search,
+.ipsSearch,
+.ipsSearchPseudo,
+.ipsBreadcrumb,
+ul.ipsBreadcrumb {
+  background: var(--tv-surface) !important;
+  background-color: var(--tv-surface) !important;
+  background-image: none !important;
+  border-color: var(--tv-border) !important;
+  color: var(--tv-text) !important;
+}
+
+.ipsHeader__secondary {
+  background: var(--tv-surface-elevated) !important;
+  background-color: var(--tv-surface-elevated) !important;
+  background-image: none !important;
+  border-color: var(--tv-border) !important;
+  color: var(--tv-text) !important;
+}
+
+.ipsNavBar_primary > ul > li > a,
+.ipsNavBar_secondary > ul > li > a,
+.ipsNavBar__label,
+.ipsNavBar__item a,
+.ipsUserNav__link,
+#elUserNav a,
+.ipsBreadcrumb a,
+.ipsBreadcrumb li {
+  color: var(--tv-text) !important;
+}
+
+.ipsNavBar_primary > ul > li.ipsNavBar_active > a,
+.ipsNavBar_secondary > ul > li.ipsNavBar_active > a,
+.ipsNavBar__item.ipsNavBar__item--active > a {
+  background: var(--tv-surface-elevated) !important;
+  background-color: var(--tv-surface-elevated) !important;
+  background-image: none !important;
+  color: var(--tv-primary) !important;
+  border-bottom: 3px solid var(--tv-primary) !important;
+}
+
+#elSearch input,
+.ipsSearch input,
+.ipsSearchPseudo input,
+.ipsSearch input[type="search"],
+.ipsSearch input[type="text"],
+.ipsSearchDialog__input {
+  background: var(--tv-surface-elevated) !important;
+  background-color: var(--tv-surface-elevated) !important;
+  color: var(--tv-text) !important;
+  border: 1px solid var(--tv-border) !important;
+}
+
+/* 3. Category Headers, Section Titles & Box Headers */
+.ipsType_sectionTitle,
+h2.ipsType_sectionTitle,
+h3.ipsType_sectionTitle,
+.ipsType_secondaryTitle,
+.ipsBox_title,
+.ipsBox_header,
+.ipsBox__header,
+header.ipsBox__header,
+h2.ipsBox__header,
+h3.ipsBox__header,
+.ipsBox > h2,
+.ipsBox > header,
+.ipsBox--forumCategory > .ipsBox__header,
+.ipsWidget_title,
+h2.ipsWidget_title,
+h3.ipsWidget_title,
+.ipsWidget_header,
+.ipsWidget__header,
+header.ipsWidget__header,
+.ipsInnerBox__header,
+.ipsTable_wrap th,
+.cForumTable th,
+.ipsTable th,
+.ipsDataItem_header,
+.cFeaturedTopic_header,
+.cFeaturedTopic > div:first-child,
+.cCmsDatabaseHeader,
+.cCmsRecord_header,
+.cCmsArticle_header {
+  background: var(--tv-surface-elevated) !important;
+  background-color: var(--tv-surface-elevated) !important;
+  background-image: none !important;
+  color: var(--tv-text) !important;
+  border-color: var(--tv-border) !important;
+}
+
+/* 4. Content Boxes, Forums, Posts, Widgets & Data Items */
+.ipsBox,
+.ipsBox--forumCategory,
+.ipsBox__content,
+.ipsWidget,
+.ipsWidget__content,
+.ipsInnerBox,
+.ipsPageHeader,
+.ipsAreaBackground,
+.ipsAreaBackground_light,
+.ipsAreaBackground_reset,
+.ipsDataItem,
+.ipsData__item,
+.ipsComment,
+.ipsBox_alt,
+.cAuthorPane,
+.cTopic,
+.cForumRow,
+.cFeaturedTopic,
+.cCmsArticle,
+.cCmsRecord,
+.cWidgetContainer {
+  background: var(--tv-surface) !important;
+  background-color: var(--tv-surface) !important;
+  background-image: none !important;
+  border-color: var(--tv-border) !important;
+  color: var(--tv-text) !important;
+}
+
+.ipsDataItem:hover,
+.cForumRow:hover {
+  background-color: var(--tv-surface-elevated) !important;
+}
+
+/* 5. Headings & Typography */
+.ipsDataItem_title a,
+.ipsType_pageTitle,
+.ipsType_sectionHead,
+.ipsType_large,
+.ipsType_break,
+h1, h2, h3, h4, h5, h6 {
+  color: var(--tv-text) !important;
+}
+
+.ipsDataItem_title a:hover,
+.ipsType_pageTitle:hover {
+  color: var(--tv-primary) !important;
+}
+
+.ipsType_light,
+.ipsType_minorHeading,
+.ipsDataItem_stats,
+.ipsComment_meta,
+.ipsType_desc,
+.cAuthorPane_info {
+  color: var(--tv-text-muted) !important;
+}
+
+/* 6. Post Content, Rich Text & Links */
+.ipsType_richText,
+.ipsType_richText p,
+.ipsType_richText span,
+.ipsType_richText div {
+  color: var(--tv-text) !important;
+  line-height: 1.68 !important;
+}
+
+.ipsType_richText a {
+  color: var(--tv-primary) !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* 7. Quotes, Spoilers & Citations */
+blockquote.ipsQuote,
+.ipsQuote_citation,
+.ipsSpoiler,
+.ipsSpoiler_header {
+  background: var(--tv-surface-elevated) !important;
+  background-image: none !important;
+  border-left: 4px solid var(--tv-primary) !important;
+  border-color: var(--tv-border) !important;
+  color: var(--tv-text) !important;
+}
+
+/* 8. Code Blocks */
+pre.ipsCode,
+code {
+  background-color: ${codeBg} !important;
+  border: 1px solid var(--tv-border) !important;
+  color: ${codeColor} !important;
+  border-radius: 6px !important;
+  font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace !important;
+}
+
+/* 9. Buttons, Actions & Badges */
+.ipsButton_primary {
+  background: var(--tv-primary) !important;
+  background-image: none !important;
+  color: ${textColorOnPrimary} !important;
+  border: none !important;
+  font-weight: 600 !important;
+}
+
+.ipsButton_primary:hover {
+  background: var(--tv-accent) !important;
+  color: ${textColorOnPrimary} !important;
+}
+
+.ipsButton_light,
+.ipsButton_normal,
+.ipsButton_secondary {
+  background: var(--tv-surface-elevated) !important;
+  background-image: none !important;
+  color: var(--tv-text) !important;
+  border: 1px solid var(--tv-border) !important;
+}
+
+/* 10. Dropdown Menus, Dialogs & Modals */
+.ipsMenu,
+.ipsMenu_innerContent,
+.ipsMenu_header,
+.ipsMenu_footer,
+.ipsDialog,
+.ipsDialog_content,
+.ipsDialog_title {
+  background: var(--tv-surface) !important;
+  background-image: none !important;
+  color: var(--tv-text) !important;
+  border-color: var(--tv-border) !important;
+}
+
+.ipsMenu_item > a {
+  color: var(--tv-text) !important;
+}
+
+.ipsMenu_item > a:hover,
+.ipsMenu_item.ipsMenu_itemActive > a {
+  background: var(--tv-surface-elevated) !important;
+  color: var(--tv-primary) !important;
+}
+
+/* 11. Form Inputs & Textareas */
+input[type="text"],
+input[type="search"],
+input[type="password"],
+input[type="email"],
+textarea,
+select {
+  background: var(--tv-surface-elevated) !important;
+  color: var(--tv-text) !important;
+  border: 1px solid var(--tv-border) !important;
+}
+
+/* 12. Tabs & Pagination */
+.ipsTabs,
+.ipsTabs_item {
+  background: var(--tv-surface) !important;
+  color: var(--tv-text) !important;
+}
+
+.ipsTabs_activeItem {
+  background: var(--tv-surface-elevated) !important;
+  color: var(--tv-primary) !important;
+  border-bottom: 2px solid var(--tv-primary) !important;
+}
+
+.ipsPagination .ipsPagination_page a {
+  background: var(--tv-surface-elevated) !important;
+  color: var(--tv-text) !important;
+  border: 1px solid var(--tv-border) !important;
+}
+
+.ipsPagination .ipsPagination_page.ipsPagination_active a {
+  background: var(--tv-primary) !important;
+  color: ${textColorOnPrimary} !important;
+  border-color: var(--tv-primary) !important;
+}
+`;
+  }
+
+  const THEME_DEFINITIONS = [
     {
       id: 'nord-frost',
       name: 'Nord Frost',
@@ -25,153 +416,7 @@
         textMuted: '#d8dee9',
         primary: '#88c0d0',
         accent: '#81a1c1'
-      },
-      css: `
-/* ========================================================
-   ThemeVault: Nord Frost for Invision Community
-   ======================================================== */
-:root {
-  --tv-bg: #242933;
-  --tv-surface: #2e3440;
-  --tv-surface-elevated: #3b4252;
-  --tv-border: #434c5e;
-  --tv-text: #eceff4;
-  --tv-text-muted: #d8dee9;
-  --tv-primary: #88c0d0;
-  --tv-accent: #81a1c1;
-
-  /* IPS 5 Token Compatibility */
-  --i-primary: var(--tv-primary);
-  --i-color--primary: var(--tv-primary);
-  --i-surface: var(--tv-surface);
-  --i-background: var(--tv-bg);
-}
-
-body.ipsApp,
-body.ipsApp_front,
-#ipsLayout_body,
-#ipsLayout_contentArea,
-#ipsLayout_mainArea {
-  background-color: var(--tv-bg) !important;
-  color: var(--tv-text) !important;
-}
-
-/* Header & Navigation */
-#ipsLayout_header,
-.ipsNavBar_primary,
-.ipsNavBar_secondary,
-.ipsBreadcrumb {
-  background-color: var(--tv-surface) !important;
-  border-color: var(--tv-border) !important;
-  color: var(--tv-text) !important;
-}
-
-.ipsNavBar_primary > ul > li > a {
-  color: var(--tv-text) !important;
-}
-
-.ipsNavBar_primary > ul > li.ipsNavBar_active > a {
-  background-color: var(--tv-surface-elevated) !important;
-  color: var(--tv-primary) !important;
-  border-bottom: 3px solid var(--tv-primary) !important;
-}
-
-/* Content Boxes, Comments, Data Items */
-.ipsBox,
-.ipsWidget,
-.ipsPageHeader,
-.ipsAreaBackground,
-.ipsAreaBackground_light,
-.ipsAreaBackground_reset,
-.ipsDataItem,
-.ipsComment,
-.ipsBox_alt,
-.cAuthorPane {
-  background-color: var(--tv-surface) !important;
-  border-color: var(--tv-border) !important;
-  color: var(--tv-text) !important;
-}
-
-.ipsDataItem:hover {
-  background-color: var(--tv-surface-elevated) !important;
-}
-
-.ipsDataItem_title a,
-.ipsType_pageTitle,
-.ipsType_sectionHead,
-.ipsType_large {
-  color: var(--tv-text) !important;
-}
-
-.ipsDataItem_title a:hover {
-  color: var(--tv-primary) !important;
-}
-
-.ipsType_light,
-.ipsType_minorHeading,
-.ipsDataItem_stats,
-.ipsComment_meta {
-  color: var(--tv-text-muted) !important;
-}
-
-/* Rich Text & Post Body */
-.ipsType_richText,
-.ipsType_richText p {
-  color: var(--tv-text) !important;
-  line-height: 1.68 !important;
-}
-
-.ipsType_richText a {
-  color: var(--tv-primary) !important;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-/* Quotes and Spoilers */
-blockquote.ipsQuote,
-.ipsQuote_citation {
-  background-color: var(--tv-surface-elevated) !important;
-  border-left: 4px solid var(--tv-primary) !important;
-  border-color: var(--tv-border) !important;
-  color: var(--tv-text) !important;
-}
-
-/* Code Blocks */
-pre.ipsCode,
-code {
-  background-color: #1e222a !important;
-  border: 1px solid var(--tv-border) !important;
-  color: #88c0d0 !important;
-  border-radius: 6px !important;
-  font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace !important;
-}
-
-/* Buttons and Controls */
-.ipsButton_primary {
-  background-color: var(--tv-primary) !important;
-  color: #242933 !important;
-  border: none !important;
-  font-weight: 600 !important;
-}
-
-.ipsButton_primary:hover {
-  background-color: var(--tv-accent) !important;
-  color: #1e222a !important;
-}
-
-.ipsButton_light,
-.ipsButton_normal {
-  background-color: var(--tv-surface-elevated) !important;
-  color: var(--tv-text) !important;
-  border: 1px solid var(--tv-border) !important;
-}
-
-/* Pagination */
-.ipsPagination .ipsPagination_page.ipsPagination_active a {
-  background-color: var(--tv-primary) !important;
-  color: #242933 !important;
-}
-`
+      }
     },
     {
       id: 'dracula',
@@ -188,198 +433,24 @@ code {
         textMuted: '#b0b5c9',
         primary: '#bd93f9',
         accent: '#ff79c6'
-      },
-      css: `
-/* ========================================================
-   ThemeVault: Dracula for Invision Community
-   ======================================================== */
-:root {
-  --tv-bg: #1e1f29;
-  --tv-surface: #282a36;
-  --tv-surface-elevated: #44475a;
-  --tv-border: #6272a4;
-  --tv-text: #f8f8f2;
-  --tv-text-muted: #b0b5c9;
-  --tv-primary: #bd93f9;
-  --tv-accent: #ff79c6;
-
-  --i-primary: var(--tv-primary);
-  --i-surface: var(--tv-surface);
-  --i-background: var(--tv-bg);
-}
-
-body.ipsApp,
-body.ipsApp_front,
-#ipsLayout_body,
-#ipsLayout_contentArea {
-  background-color: var(--tv-bg) !important;
-  color: var(--tv-text) !important;
-}
-
-#ipsLayout_header,
-.ipsNavBar_primary,
-.ipsNavBar_secondary,
-.ipsBreadcrumb {
-  background-color: var(--tv-surface) !important;
-  border-color: var(--tv-border) !important;
-  color: var(--tv-text) !important;
-}
-
-.ipsNavBar_primary > ul > li.ipsNavBar_active > a {
-  background-color: var(--tv-surface-elevated) !important;
-  color: var(--tv-accent) !important;
-  border-bottom: 3px solid var(--tv-accent) !important;
-}
-
-.ipsBox,
-.ipsWidget,
-.ipsPageHeader,
-.ipsAreaBackground,
-.ipsDataItem,
-.ipsComment,
-.cAuthorPane {
-  background-color: var(--tv-surface) !important;
-  border-color: #3b3e52 !important;
-  color: var(--tv-text) !important;
-}
-
-.ipsDataItem:hover {
-  background-color: #333646 !important;
-}
-
-.ipsDataItem_title a,
-.ipsType_pageTitle {
-  color: var(--tv-text) !important;
-}
-
-.ipsDataItem_title a:hover {
-  color: var(--tv-accent) !important;
-}
-
-.ipsType_richText,
-.ipsType_richText p {
-  color: var(--tv-text) !important;
-}
-
-.ipsType_richText a {
-  color: var(--tv-primary) !important;
-}
-
-blockquote.ipsQuote {
-  background-color: #333646 !important;
-  border-left: 4px solid var(--tv-accent) !important;
-  color: var(--tv-text) !important;
-}
-
-pre.ipsCode, code {
-  background-color: #171821 !important;
-  border: 1px solid var(--tv-border) !important;
-  color: #50fa7b !important;
-}
-
-.ipsButton_primary {
-  background-color: var(--tv-primary) !important;
-  color: #1e1f29 !important;
-  font-weight: 600 !important;
-}
-
-.ipsButton_primary:hover {
-  background-color: var(--tv-accent) !important;
-  color: #ffffff !important;
-}
-`
+      }
     },
     {
       id: 'midnight-oled',
       name: 'Midnight OLED',
-      description: 'True pure black (#000000) for OLED screens, deep battery savings, and electric cyan.',
+      description: 'Pure black (#000000) for OLED panels, high battery efficiency, and electric cyan accents.',
       author: 'ThemeVault Curators',
       isBuiltIn: true,
       colors: {
         bg: '#000000',
-        surface: '#0f1013',
-        surfaceElevated: '#1b1d22',
-        border: '#2a2e38',
-        text: '#f1f5f9',
-        textMuted: '#94a3b8',
-        primary: '#38bdf8',
-        accent: '#06b6d4'
-      },
-      css: `
-/* ========================================================
-   ThemeVault: Midnight OLED for Invision Community
-   ======================================================== */
-:root {
-  --tv-bg: #000000;
-  --tv-surface: #0e0f12;
-  --tv-surface-elevated: #181a20;
-  --tv-border: #232731;
-  --tv-text: #f1f5f9;
-  --tv-text-muted: #94a3b8;
-  --tv-primary: #38bdf8;
-  --tv-accent: #06b6d4;
-
-  --i-primary: var(--tv-primary);
-  --i-surface: var(--tv-surface);
-  --i-background: var(--tv-bg);
-}
-
-body.ipsApp,
-body.ipsApp_front,
-#ipsLayout_body,
-#ipsLayout_contentArea {
-  background-color: #000000 !important;
-  color: var(--tv-text) !important;
-}
-
-#ipsLayout_header,
-.ipsNavBar_primary,
-.ipsBreadcrumb,
-.ipsBox,
-.ipsWidget,
-.ipsPageHeader,
-.ipsAreaBackground,
-.ipsDataItem,
-.ipsComment,
-.cAuthorPane {
-  background-color: var(--tv-surface) !important;
-  border-color: var(--tv-border) !important;
-  color: var(--tv-text) !important;
-}
-
-.ipsDataItem:hover {
-  background-color: var(--tv-surface-elevated) !important;
-}
-
-.ipsDataItem_title a {
-  color: #ffffff !important;
-}
-
-.ipsDataItem_title a:hover {
-  color: var(--tv-primary) !important;
-}
-
-.ipsType_richText a {
-  color: var(--tv-primary) !important;
-}
-
-blockquote.ipsQuote {
-  background-color: var(--tv-surface-elevated) !important;
-  border-left: 3px solid var(--tv-primary) !important;
-}
-
-pre.ipsCode, code {
-  background-color: #000000 !important;
-  border: 1px solid var(--tv-border) !important;
-  color: #38bdf8 !important;
-}
-
-.ipsButton_primary {
-  background-color: var(--tv-primary) !important;
-  color: #000000 !important;
-  font-weight: 700 !important;
-}
-`
+        surface: '#0a0a0a',
+        surfaceElevated: '#161616',
+        border: '#262626',
+        text: '#ededed',
+        textMuted: '#888888',
+        primary: '#00f0ff',
+        accent: '#7000ff'
+      }
     },
     {
       id: 'catppuccin-mocha',
@@ -396,170 +467,32 @@ pre.ipsCode, code {
         textMuted: '#a6adc8',
         primary: '#cba6f7',
         accent: '#f5c2e7'
-      },
-      css: `
-/* ========================================================
-   ThemeVault: Catppuccin Mocha for Invision Community
-   ======================================================== */
-:root {
-  --tv-bg: #181825;
-  --tv-surface: #1e1e2e;
-  --tv-surface-elevated: #313244;
-  --tv-border: #45475a;
-  --tv-text: #cdd6f4;
-  --tv-text-muted: #a6adc8;
-  --tv-primary: #cba6f7;
-  --tv-accent: #f5c2e7;
-
-  --i-primary: var(--tv-primary);
-  --i-surface: var(--tv-surface);
-  --i-background: var(--tv-bg);
-}
-
-body.ipsApp,
-body.ipsApp_front,
-#ipsLayout_body,
-#ipsLayout_contentArea {
-  background-color: var(--tv-bg) !important;
-  color: var(--tv-text) !important;
-}
-
-#ipsLayout_header,
-.ipsNavBar_primary,
-.ipsBreadcrumb,
-.ipsBox,
-.ipsWidget,
-.ipsPageHeader,
-.ipsDataItem,
-.ipsComment,
-.cAuthorPane {
-  background-color: var(--tv-surface) !important;
-  border-color: var(--tv-border) !important;
-  color: var(--tv-text) !important;
-}
-
-.ipsDataItem:hover {
-  background-color: var(--tv-surface-elevated) !important;
-}
-
-.ipsDataItem_title a:hover {
-  color: var(--tv-primary) !important;
-}
-
-.ipsType_richText a {
-  color: var(--tv-primary) !important;
-}
-
-blockquote.ipsQuote {
-  background-color: var(--tv-surface-elevated) !important;
-  border-left: 4px solid var(--tv-primary) !important;
-}
-
-pre.ipsCode, code {
-  background-color: #11111b !important;
-  border: 1px solid var(--tv-border) !important;
-  color: #a6e3a1 !important;
-}
-
-.ipsButton_primary {
-  background-color: var(--tv-primary) !important;
-  color: #11111b !important;
-  font-weight: 600 !important;
-}
-`
+      }
     },
     {
       id: 'forest-emerald',
       name: 'Forest Emerald',
-      description: 'Earthy organic moss & deep pine tones with vivid emerald green accents.',
+      description: 'Earthy, deep woodland green tones with crisp emerald accents.',
       author: 'ThemeVault Curators',
       isBuiltIn: true,
       colors: {
-        bg: '#0c1412',
-        surface: '#13211e',
-        surfaceElevated: '#1a2e2a',
-        border: '#2a443e',
-        text: '#ecfdf5',
-        textMuted: '#a7f3d0',
-        primary: '#34d399',
-        accent: '#10b981'
-      },
-      css: `
-/* ========================================================
-   ThemeVault: Forest Emerald for Invision Community
-   ======================================================== */
-:root {
-  --tv-bg: #0c1412;
-  --tv-surface: #13211e;
-  --tv-surface-elevated: #1a2e2a;
-  --tv-border: #2a443e;
-  --tv-text: #ecfdf5;
-  --tv-text-muted: #99f6e4;
-  --tv-primary: #34d399;
-  --tv-accent: #10b981;
-
-  --i-primary: var(--tv-primary);
-  --i-surface: var(--tv-surface);
-  --i-background: var(--tv-bg);
-}
-
-body.ipsApp,
-body.ipsApp_front,
-#ipsLayout_body,
-#ipsLayout_contentArea {
-  background-color: var(--tv-bg) !important;
-  color: var(--tv-text) !important;
-}
-
-#ipsLayout_header,
-.ipsNavBar_primary,
-.ipsBreadcrumb,
-.ipsBox,
-.ipsWidget,
-.ipsDataItem,
-.ipsComment,
-.cAuthorPane {
-  background-color: var(--tv-surface) !important;
-  border-color: var(--tv-border) !important;
-  color: var(--tv-text) !important;
-}
-
-.ipsDataItem:hover {
-  background-color: var(--tv-surface-elevated) !important;
-}
-
-.ipsDataItem_title a:hover {
-  color: var(--tv-primary) !important;
-}
-
-.ipsType_richText a {
-  color: var(--tv-primary) !important;
-}
-
-blockquote.ipsQuote {
-  background-color: var(--tv-surface-elevated) !important;
-  border-left: 4px solid var(--tv-primary) !important;
-}
-
-pre.ipsCode, code {
-  background-color: #080d0c !important;
-  border: 1px solid var(--tv-border) !important;
-  color: #34d399 !important;
-}
-
-.ipsButton_primary {
-  background-color: var(--tv-primary) !important;
-  color: #0c1412 !important;
-  font-weight: 600 !important;
-}
-`
+        bg: '#111a16',
+        surface: '#17231e',
+        surfaceElevated: '#23342d',
+        border: '#2f463d',
+        text: '#e2ece7',
+        textMuted: '#9cb2a8',
+        primary: '#10b981',
+        accent: '#34d399'
+      }
     },
     {
       id: 'clean-slate-light',
       name: 'Clean Slate Light',
-      description: 'Crisp, high-legibility minimalist light theme with soft card surfaces and indigo accents.',
+      description: 'Minimalist high-contrast light theme engineered for daytime readability.',
       author: 'ThemeVault Curators',
       isBuiltIn: true,
+      isLight: true,
       colors: {
         bg: '#f8fafc',
         surface: '#ffffff',
@@ -567,86 +500,20 @@ pre.ipsCode, code {
         border: '#e2e8f0',
         text: '#0f172a',
         textMuted: '#64748b',
-        primary: '#4f46e5',
-        accent: '#6366f1'
-      },
-      css: `
-/* ========================================================
-   ThemeVault: Clean Slate Light for Invision Community
-   ======================================================== */
-:root {
-  --tv-bg: #f8fafc;
-  --tv-surface: #ffffff;
-  --tv-surface-elevated: #f1f5f9;
-  --tv-border: #e2e8f0;
-  --tv-text: #0f172a;
-  --tv-text-muted: #64748b;
-  --tv-primary: #4f46e5;
-  --tv-accent: #6366f1;
-
-  --i-primary: var(--tv-primary);
-  --i-surface: var(--tv-surface);
-  --i-background: var(--tv-bg);
-}
-
-body.ipsApp,
-body.ipsApp_front,
-#ipsLayout_body,
-#ipsLayout_contentArea {
-  background-color: var(--tv-bg) !important;
-  color: var(--tv-text) !important;
-}
-
-#ipsLayout_header,
-.ipsNavBar_primary,
-.ipsBreadcrumb,
-.ipsBox,
-.ipsWidget,
-.ipsDataItem,
-.ipsComment,
-.cAuthorPane {
-  background-color: var(--tv-surface) !important;
-  border-color: var(--tv-border) !important;
-  color: var(--tv-text) !important;
-}
-
-.ipsDataItem:hover {
-  background-color: var(--tv-surface-elevated) !important;
-}
-
-.ipsDataItem_title a {
-  color: #0f172a !important;
-}
-
-.ipsDataItem_title a:hover {
-  color: var(--tv-primary) !important;
-}
-
-.ipsType_richText a {
-  color: var(--tv-primary) !important;
-}
-
-blockquote.ipsQuote {
-  background-color: var(--tv-surface-elevated) !important;
-  border-left: 4px solid var(--tv-primary) !important;
-}
-
-pre.ipsCode, code {
-  background-color: #f1f5f9 !important;
-  border: 1px solid var(--tv-border) !important;
-  color: #334155 !important;
-}
-
-.ipsButton_primary {
-  background-color: var(--tv-primary) !important;
-  color: #ffffff !important;
-  font-weight: 600 !important;
-}
-`
+        primary: '#0284c7',
+        accent: '#38bdf8'
+      }
     }
   ];
 
+  // Attach pre-generated CSS to each theme definition
+  const DEFAULT_THEMES = THEME_DEFINITIONS.map((def) => ({
+    ...def,
+    css: buildThemeCSS(def.name, def.colors, Boolean(def.isLight))
+  }));
+
   global.DEFAULT_THEMES = DEFAULT_THEMES;
+  global.buildThemeCSS = buildThemeCSS;
 
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = DEFAULT_THEMES;

@@ -22,7 +22,7 @@ const targets = ['chrome', 'firefox'];
 for (const target of targets) {
   const targetDir = path.join(distDir, target);
   const zipName = `themevault-${target}.zip`;
-  const zipPath = path.join(rootDir, zipName);
+  const zipPath = path.join(distDir, zipName);
 
   if (fs.existsSync(zipPath)) {
     fs.unlinkSync(zipPath);

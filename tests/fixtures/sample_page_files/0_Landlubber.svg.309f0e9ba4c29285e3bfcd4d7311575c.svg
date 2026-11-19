@@ -1,0 +1,9 @@
+<svg width="150" height="150" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="75" cy="75" r="74" fill="url(#ring)"/>
+<circle cx="75" cy="75" r="60" fill="#14264A"/>
+<circle cx="75" cy="75" r="60" fill="none" stroke="#B9C0C7" stroke-width="2.5"/>
+<circle cx="75" cy="75" r="26" stroke="#B9C0C7" stroke-width="4" fill="none" opacity="0.55"/>
+<defs><linearGradient id="ring" x1="0" y1="0" x2="150" y2="150" gradientUnits="userSpaceOnUse">
+<stop offset="0.1" stop-color="#565E66"/><stop offset="0.9" stop-color="#C8CDD2"/>
+</linearGradient></defs>
+</svg>

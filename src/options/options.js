@@ -257,64 +257,23 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   btnInsertBoilerplate.addEventListener('click', () => {
-    const boilerplate = `
-/* ========================================================
-   ThemeVault Invision Community Custom Theme
-   ======================================================== */
-:root {
-  --tv-bg: ${tokenBg.value};
-  --tv-surface: ${tokenSurface.value};
-  --tv-primary: ${tokenPrimary.value};
-  --tv-text: ${tokenText.value};
+    const name = studioName.value.trim() || 'Custom Theme';
+    const colors = {
+      bg: tokenBg.value || '#181825',
+      surface: tokenSurface.value || '#1e1e2e',
+      surfaceElevated: '#313244',
+      border: 'rgba(255, 255, 255, 0.12)',
+      text: tokenText.value || '#cdd6f4',
+      textMuted: '#a6adc8',
+      primary: tokenPrimary.value || '#cba6f7',
+      accent: tokenPrimary.value || '#f5c2e7'
+    };
 
-  /* IC5 Token Support */
-  --i-primary: var(--tv-primary);
-  --i-surface: var(--tv-surface);
-  --i-background: var(--tv-bg);
-}
-
-body.ipsApp,
-body.ipsApp_front,
-#ipsLayout_body,
-#ipsLayout_contentArea {
-  background-color: var(--tv-bg) !important;
-  color: var(--tv-text) !important;
-}
-
-#ipsLayout_header,
-.ipsNavBar_primary,
-.ipsBreadcrumb,
-.ipsBox,
-.ipsWidget,
-.ipsPageHeader,
-.ipsDataItem,
-.ipsComment,
-.cAuthorPane {
-  background-color: var(--tv-surface) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-  color: var(--tv-text) !important;
-}
-
-.ipsDataItem_title a,
-.ipsType_pageTitle {
-  color: var(--tv-text) !important;
-}
-
-.ipsDataItem_title a:hover {
-  color: var(--tv-primary) !important;
-}
-
-.ipsType_richText a {
-  color: var(--tv-primary) !important;
-}
-
-.ipsButton_primary {
-  background-color: var(--tv-primary) !important;
-  color: #0f172a !important;
-  font-weight: 600 !important;
-}
-`;
-    studioCss.value = boilerplate.trim();
+    if (typeof buildThemeCSS === 'function') {
+      studioCss.value = buildThemeCSS(name, colors).trim();
+    } else {
+      studioCss.value = `:root {\n  --tv-bg: ${colors.bg};\n  --tv-surface: ${colors.surface};\n  --tv-primary: ${colors.primary};\n  --tv-text: ${colors.text};\n}\nbody.ipsApp { background: var(--tv-bg) !important; color: var(--tv-text) !important; }`;
+    }
   });
 
   btnSaveStudioTheme.addEventListener('click', async () => {

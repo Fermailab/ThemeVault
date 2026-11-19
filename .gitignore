@@ -13,6 +13,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Local store image assets & screenshots
+docs/assets/
+docs/*.png
+docs/*.jpg
+docs/*.jpeg
+
 # Environment and editor metadata
 .DS_Store
 Thumbs.db

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" width="400" height="100">
+  <rect width="400" height="100" fill="transparent"/>
+  <circle cx="50" cy="50" r="32" fill="#88c0d0"/>
+  <text x="50" y="60" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="bold" fill="#1e1e2e" text-anchor="middle">CF</text>
+  <text x="96" y="58" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="700" fill="#eceff4">Community Forum</text>
+</svg>
